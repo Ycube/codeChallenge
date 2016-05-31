@@ -1,3 +1,4 @@
+//beezwax
 function findFirstMatchChar(string) {
   var answer = '';
   //edge case  
