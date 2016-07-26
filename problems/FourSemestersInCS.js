@@ -37,3 +37,49 @@ let insertionSort = (list) => {
   }
   return list;
 }
+
+// Merge Sort
+// Time: O(nlogn)
+let mergeSort = (list) => {
+  if (list.length < 2) {
+    return list; 
+  } 
+
+  const middle = Math.floor(list.length/2);
+  const leftArr = list.slice(0, middle);
+  
+  const rightArr = list.slice(middle);
+  
+
+  const sortedL = mergeSort(leftArr);
+  const sortedR = mergeSort(rightArr);
+
+  return merge(sortedL, sortedR);
+};
+
+let merge = (arr1, arr2) => {
+  const results = [];
+
+  while (arr1.length && arr2.length) {
+    if (arr1[0] <= arr2[0]) {
+      results.push(arr1.shift()); //takes 0th element and pushes into results
+    } else {
+      results.push(arr2.shift());
+    }
+  }
+
+  while (arr1.length) {
+    results.push(arr1.shift());
+   }
+
+   while (arr2.length) {
+      results.push(arr2.shift());
+   }
+
+  return results;
+};
+
+
+let test = [10,5,4,8,2,6,4,7,9,1];
+console.log(mergeSort(test));
+
