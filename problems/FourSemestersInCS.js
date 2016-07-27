@@ -38,7 +38,7 @@ let insertionSort = (list) => {
   return list;
 }
 
-// Merge Sort
+// Merge Sort - divide and conquer method
 // Time: O(nlogn)
 let mergeSort = (list) => {
   if (list.length < 2) {
@@ -47,9 +47,7 @@ let mergeSort = (list) => {
 
   const middle = Math.floor(list.length/2);
   const leftArr = list.slice(0, middle);
-  
   const rightArr = list.slice(middle);
-  
 
   const sortedL = mergeSort(leftArr);
   const sortedR = mergeSort(rightArr);
@@ -76,10 +74,43 @@ let merge = (arr1, arr2) => {
       results.push(arr2.shift());
    }
 
-  return results;
+  // return results;
+  return [...results, ...arr1, ...arr2];
 };
 
 
-let test = [10,5,4,8,2,6,4,7,9,1];
-console.log(mergeSort(test));
+// Quick Sort - divide and conquer using pivot point
+// Time: O(nlogn)
+// Space is better than MergeSort
+let quickSort = (list) => {
+  if (list.length <= 1) {
+    return list;
+  }
+  //pick a pivot
+  let pivot = list[list.length-1];
+  let arrL = [];
+  let arrR = [];
+
+  for (let i = 0; i < list.length-1; i++) {
+  //create L < pivot
+    if (list[i] < pivot) {
+      arrL.push(list[i]);
+    } else {
+  // create R > pivot
+      arrR.push(list[i]);
+    }
+  }
+  // call quickSort on L and R
+  // join L, pivot, R
+  return [...quickSort(arrL), pivot, ...quickSort(arrR)];
+}
+
+let test = [10,8,7,3,4,5,6,1,2,9];
+console.log(quickSort(test));
+
+
+
+
+
+
 
